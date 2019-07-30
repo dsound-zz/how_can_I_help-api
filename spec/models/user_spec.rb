@@ -10,6 +10,7 @@ RSpec.describe User, type: :model do
   describe "#user validations" do
     it { should validate_presence_of(:first_name)}  
     it { should validate_presence_of(:last_name)} 
+    it { should validate_presecne_of(:username)}
     it { should validate_presence_of(:email)}
     it { should validate_presence_of(:password_digest)}
   end 

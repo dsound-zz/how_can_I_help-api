@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_30_182146) do
+ActiveRecord::Schema.define(version: 2019_07_30_220738) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -47,16 +47,16 @@ ActiveRecord::Schema.define(version: 2019_07_30_182146) do
     t.boolean "priority"
     t.string "organization"
     t.string "url"
-    t.date "start_time"
     t.integer "hours"
-    t.date "created_date"
-    t.date "end_date"
     t.string "status"
     t.integer "community_board"
     t.integer "community_council"
     t.integer "category_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "start_time"
+    t.datetime "created_date"
+    t.datetime "end_date"
   end
 
   create_table "opportunity_categories", force: :cascade do |t|
@@ -90,6 +90,7 @@ ActiveRecord::Schema.define(version: 2019_07_30_182146) do
     t.string "password_digest"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "username"
   end
 
 end

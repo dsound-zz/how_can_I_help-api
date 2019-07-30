@@ -7,6 +7,7 @@ class SodaApi < ApplicationRecord
         client = SODA::Client.new({:domain => "data.cityofnewyork.us", :app_token => "WfoD6Oo0aLuRwT6FHsu2l9RpX"})
         response = HTTParty.get("https://data.cityofnewyork.us/resource/n4ac-3636.json") 
         result = response.map do |r| 
+            byebug 
             # created_date = DateTime.parse(r['created_date'])
             # end_date = DateTime.parse(r['end_date'])
             {
@@ -29,10 +30,15 @@ class SodaApi < ApplicationRecord
         client = SODA::Client.new({:domain => "data.cityofnewyork.us", :app_token => "WfoD6Oo0aLuRwT6FHsu2l9RpX"})
         response = HTTParty.get("https://data.cityofnewyork.us/resource/n4ac-3636.json") 
         result = response.map do |r| 
+            {
             address: r['locality_address'],
             city: r['locality_city'],
-            state: r['locality_state],
-            
+            state: r['locality_state'],
+            zipcode: r['locality_zip'],
+            bourogh: r['borough'],
+            longitude: r['longitude'],
+            latitude: r['latitude']
+            }
         end 
     end 
 end

@@ -4,7 +4,7 @@ class SodaApi < ApplicationRecord
     
 
     def self.get_response 
-        client = SODA::Client.new({:domain => "data.cityofnewyork.us", :app_token => "WfoD6Oo0aLuRwT6FHsu2l9RpX"})
+        client = SODA::Client.new({:domain => "data.cityofnewyork.us", :app_token => Rails.application.credentials.dig(:soda_nyc)})
         response = HTTParty.get("https://data.cityofnewyork.us/resource/n4ac-3636.json") 
     end
 

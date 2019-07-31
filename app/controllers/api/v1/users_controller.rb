@@ -13,7 +13,6 @@ class Api::V1::UsersController < ApplicationController
       username: params[:username],
       password: params[:password]
     )
-    byebug
     if @user.save
       render json: {user: UserSerializer.new(@user), token: Rails.application.credentials.jwt}, status: :ok
     else

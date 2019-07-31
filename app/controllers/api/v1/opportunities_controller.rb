@@ -1,6 +1,6 @@
 class Api::V1::OpportunitiesController < ApplicationController
     before_action :find_opportunities, only: [:show, :update, :destroy]
-    
+    before_action :authorize_access_request!, except: [:show, :index]
   
 
     def index 

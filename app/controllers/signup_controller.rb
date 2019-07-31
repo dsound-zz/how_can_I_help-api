@@ -9,7 +9,7 @@
       response.set_cookie(JWTSessions.access_cookie,
                           value: tokens[:access],
                           httponly: true,
-                          secure: Rails.env.production?)
+                          secure: Rail.application.credentials.dig(:jwt))
       render json: { csrf: tokens[:csrf] }
     else
       render json: { error: user.errors.full_messages.join(' ') }, status: :unprocessable_entity

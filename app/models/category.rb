@@ -1,3 +1,3 @@
 class Category < ApplicationRecord
-    has_many :categories, optional: true 
+    has_many :categories 
 end

@@ -1,17 +1,20 @@
 class Api::V1::OpportunitiesController < ApplicationController
     before_action :find_opportunities, only: [:show, :update, :destroy]
     
+  
+
     def index 
-        @opportunities = SodaApi.get_opportunities 
-        render json: @opportunities, status: :ok 
-    end
+        @opportunities = current_user.opportunities.ApplicationController
+
+        render json: @opportunities 
+    end 
 
     def show 
         render json: @opportunity, status: ok 
     end 
 
     def create 
-        @opportunity = Opportunity.new(opportunity_params)
+        @opportunity = current_user.opportunities.build(opportunity_params)
         if @opportunity.save 
             render json: @opportunity, status: :ok 
         else    
@@ -38,7 +41,7 @@ class Api::V1::OpportunitiesController < ApplicationController
     private 
 
     def find_opportunities 
-        @opportunity = Opportunity.find(params[:id])
+        @opportunity = current_user.opportunities.find(params[:id])
     end 
     
     def opportunity_params 

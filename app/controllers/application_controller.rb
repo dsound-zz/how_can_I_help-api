@@ -1,26 +1,17 @@
 class ApplicationController < ActionController::API
+    include JWTSessions::RailsAuthorization
+    rescue_from JWTSessions::Errors::Unauthorized, with :not_authorized
+   
+####### Auth pipeline #########
 
-    ####### Auth pipeline #########
-
-    def encode_token(user_id)
-        JWT.encode({user_id: user_id}, Rails.application.credentials.jwt)
+    private 
+    def current_user
+        @current_user ||= User.find(payload)
     end
-
-        def token
-        request.headers["Authorization"]
-        end
-
-    def decode_token
-        begin
-        JWT.decode(token, Rails.application.credentials.jwt[0]["user_id"])
-        rescue
-        nil
-        end
+    
+    def not_authorized
+        render json: { error: 'Not authorized' }, status: :unauthorized 
     end
-
-    def curr_user
-        User.find_by(id: decode_token)
-        
-    end
+   
 
 end

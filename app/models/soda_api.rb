@@ -1,15 +1,21 @@
 class SodaApi < ApplicationRecord
     include HTTParty 
     
-   
     
-    def self.opportunities_api 
+
+    def self.get_response 
         client = SODA::Client.new({:domain => "data.cityofnewyork.us", :app_token => "WfoD6Oo0aLuRwT6FHsu2l9RpX"})
         response = HTTParty.get("https://data.cityofnewyork.us/resource/n4ac-3636.json") 
-        result = response.map do |r| 
-            byebug 
-            # created_date = DateTime.parse(r['created_date'])
-            # end_date = DateTime.parse(r['end_date'])
+    end
+
+    def self.parse_date(string)
+     return nil unless string
+     DateTime.parse(string)
+    end
+    
+    def self.get_opportunities
+        
+        result = get_response.map do |r| 
             {
             title: r['title'],
             hits: r['hits'],
@@ -18,18 +24,17 @@ class SodaApi < ApplicationRecord
             url: r['display_url'],
             # start_time: DateTime.parse(r['start_time']),
             hours: r['hours'],
-            # created_date: DateTime.parse(created_date),
-            # end_date: DateTime.parse(end_date),
-            status: r['status'],
+            created_date: parse_date(r['created_date']),
+            end_date: parse_date(r['end_date']),
+            status: r['status']
             }
         end 
         result  
     end 
 
-    def location_api 
-        client = SODA::Client.new({:domain => "data.cityofnewyork.us", :app_token => "WfoD6Oo0aLuRwT6FHsu2l9RpX"})
-        response = HTTParty.get("https://data.cityofnewyork.us/resource/n4ac-3636.json") 
-        result = response.map do |r| 
+    def self.get_locations 
+        
+        result = get_response.map do |r| 
             {
             address: r['locality_address'],
             city: r['locality_city'],
@@ -40,5 +45,14 @@ class SodaApi < ApplicationRecord
             latitude: r['latitude']
             }
         end 
+        result
     end 
+
+    def self.get_categories 
+        result = get_response.map do |r|
+            byebug 
+        end 
+    end
+
+
 end

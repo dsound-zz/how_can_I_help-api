@@ -5,8 +5,8 @@ RSpec.describe Opportunity, type: :model do
 
   describe "check associations for #opportunity" do  
     it { should have_many(:users).through(:user_opportunities)}  
-    it { should have_many(:categories).through(:opportunity_categories)}
-    it { should have_many(:locations).through(:opportunity_locations)}
+    it { should belongs_to(:categories)}
+    # it { should have_many(:locations).through(:opportunity_locations)}
     
   end 
 

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_30_220738) do
+ActiveRecord::Schema.define(version: 2019_07_31_010918) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -57,6 +57,13 @@ ActiveRecord::Schema.define(version: 2019_07_30_220738) do
     t.datetime "start_time"
     t.datetime "created_date"
     t.datetime "end_date"
+    t.string "address"
+    t.string "city"
+    t.string "state"
+    t.string "zipcode"
+    t.string "borough"
+    t.integer "latitude"
+    t.integer "longitude"
   end
 
   create_table "opportunity_categories", force: :cascade do |t|

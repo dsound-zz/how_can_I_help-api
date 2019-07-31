@@ -1,4 +1,3 @@
 class Category < ApplicationRecord
-    has_many :opportunity_categories
-    has_many :opportunities, through: :opportunity_categories 
+    has_many :categories, optional: true 
 end

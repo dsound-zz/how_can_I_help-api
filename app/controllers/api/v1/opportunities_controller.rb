@@ -1,16 +1,17 @@
 class Api::V1::OpportunitiesController < ApplicationController
-    before_action :find_opportunities, only: [:show, :update, :destroy]
+    before_action :find_opportunities, only: [:update, :destroy]
     before_action :authorize_access_request!, except: [:show, :index]
   
 
     def index 
-        @opportunities = current_user.opportunities.ApplicationController
+        @opportunities = Opportunity.all
 
         render json: @opportunities 
     end 
 
     def show 
-        render json: @opportunity, status: ok 
+        @opportunity = Opportunity.find(params[:id])
+        render json: @opportunity, status: :ok 
     end 
 
     def create 

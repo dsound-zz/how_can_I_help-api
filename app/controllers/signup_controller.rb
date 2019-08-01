@@ -1,5 +1,6 @@
  class SignupController < ApplicationController
   def create
+    byebug 
     user = User.new(user_params)
     if user.save
       payload  = { user_id: user.id }
@@ -9,9 +10,11 @@
       response.set_cookie(JWTSessions.access_cookie,
                           value: tokens[:access],
                           httponly: true,
-                          secure: Rail.application.credentials.dig(:jwt))
-      render json: { csrf: tokens[:csrf] }
+                          secure: Rails.env.production?)
+      render json: { user: UserSerializer.new(@user), csrf: tokens[:csrf] }
+  
     else
+       
       render json: { error: user.errors.full_messages.join(' ') }, status: :unprocessable_entity
     end
   end
@@ -19,7 +22,7 @@
   private
 
   def user_params
-    params.permit(:first_name, :last_name, :username, :email, :password, :password_confirmation)
+    params.permit(:first_name, :last_name, :username, :email, :password)
   end
 end
 

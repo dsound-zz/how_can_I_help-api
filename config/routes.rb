@@ -7,13 +7,15 @@ Rails.application.routes.draw do
 
   namespace :api do   
     namespace :v1 do   
-      resources :users, only: [:index, :show, :create, :update, :destroy]
+      # resources :users, only: [:index, :show, :create, :update, :destroy]
       resources :categories, only: [:index, :show, :create, :update, :destroy]
       resources :opportunities
       resources :opportuniy_api, only: [:index, :show]
       
     end
   end
+
+  root to: "home#index" 
 
   post 'refresh', controller: :refresh, action: :create
   post 'signin', controller: :signin, action: :create 

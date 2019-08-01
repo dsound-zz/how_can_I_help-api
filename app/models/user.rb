@@ -6,6 +6,6 @@ class User < ApplicationRecord
     
     validates_presence_of :first_name, :last_name, :username, :email, :password_digest
     validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i
-    validates_length_of :password_digest, in: 6..20 
+    validates_length_of :password_digest, in: 6..70 
     validates_uniqueness_of :email, :username
 end

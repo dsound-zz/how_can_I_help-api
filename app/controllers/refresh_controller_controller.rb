@@ -9,7 +9,7 @@ class RefreshControllerController < ApplicationController
     response.set_cookie(JWTSessions.access_cookie,
                         value: tokens[:access],
                         httponly: true,
-                        secure: Rail.application.credentials.dig(:jwt))
+                        secure: Rails.env.production?)
     render json: { csrf: tokens[:csrf] }
   end
 end

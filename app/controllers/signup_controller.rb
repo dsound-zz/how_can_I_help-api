@@ -1,6 +1,7 @@
  class SignupController < ApplicationController
+ 
   def create
-    byebug 
+
     user = User.new(user_params)
     if user.save
       payload  = { user_id: user.id }
@@ -11,7 +12,7 @@
                           value: tokens[:access],
                           httponly: true,
                           secure: Rails.env.production?)
-      render json: { user: UserSerializer.new(@user), csrf: tokens[:csrf] }
+      render json: { csrf: tokens[:csrf] }
   
     else
        
@@ -22,7 +23,7 @@
   private
 
   def user_params
-    params.permit(:first_name, :last_name, :username, :email, :password)
+    params.permit(:first_name, :last_name, :username, :email, :password, :password_confirmation)
   end
 end
 
